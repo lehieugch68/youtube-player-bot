@@ -105,7 +105,6 @@ class YoutubePlayer {
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
             		serverQueue.volume = volume;
             		serverQueue.connection.dispatcher.setVolume(volume/100);
-            		console.log(this.queue.get(guildID).volume);
             		return resolve();
         	});
     	}
