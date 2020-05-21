@@ -31,7 +31,7 @@ client.on('message', async msg => {
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	if (command == null) return;
 	try {
-		command.execute(msg, args, client, db);
+		command.execute(msg, args, client);
 	} catch (error) {
 		return msg.reply(`Xảy ra lỗi khi thực hiện lệnh này:\n\`${error.message}\``);
 	}
