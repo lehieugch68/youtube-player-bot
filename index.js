@@ -8,7 +8,7 @@ const options = {
 }
 const YoutubePlayer = require('./YoutubePlayer.js');
 const youtubePlayer = new YoutubePlayer(client, options);
-client.youtubePlayer = youtubePlayer;
+client.player = youtubePlayer;
 
 const fs = require('fs');
 client.commands = new Discord.Collection();
