@@ -1,5 +1,5 @@
 const ytdl = require('ytdl-core')
-const Shuffle = require('../function/shuffle.js')
+const Shuffle = require('./shuffle.js')
 
 class Queue {
 	constructor(voiceChannel) {
@@ -57,23 +57,23 @@ class YoutubePlayer {
 		})
 	}
 	pause(guildID){
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            if (serverQueue.connection.dispatcher.paused) return reject('Đang tạm dừng rồi!');
-            serverQueue.connection.dispatcher.pause();
-            return resolve(serverQueue.songs[0]);
-        });
-    }
-    resume(guildID){
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+            		if (serverQueue.connection.dispatcher.paused) return reject('Đang tạm dừng rồi!');
+            		serverQueue.connection.dispatcher.pause();
+            		return resolve(serverQueue.songs[0]);
+        	});
+    	}
+    	resume(guildID){
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            if (!serverQueue.connection.dispatcher.paused) return reject('Có bài nào đang tạm dừng đâu!');
-            serverQueue.connection.dispatcher.resume();
-            return resolve(serverQueue.songs[0]);
-        });
-    }
+            		if (!serverQueue.connection.dispatcher.paused) return reject('Có bài nào đang tạm dừng đâu!');
+            		serverQueue.connection.dispatcher.resume();
+            		return resolve(serverQueue.songs[0]);
+        	});
+    	}
 	skip(guildID) {
 		return new Promise(async (resolve, reject) => {
 			let serverQueue = this.queue.get(guildID);
@@ -83,56 +83,56 @@ class YoutubePlayer {
 		})
 	}
 	getQueue(guildID) {
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            return resolve(serverQueue.songs);
-        });
-    }
-    clearQueue(guildID){
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+            		return resolve(serverQueue.songs);
+        	});
+    	}
+    	clearQueue(guildID){
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            let song = serverQueue.songs.shift();
-            let count = serverQueue.songs.length;
-            serverQueue.songs = [song];
-            return resolve(count);
-        });
-    }
-    setVolume(guildID, volume) {
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+            		let song = serverQueue.songs.shift();
+            		let count = serverQueue.songs.length;
+            		serverQueue.songs = [song];
+            		return resolve(count);
+        	});
+    	}
+    	setVolume(guildID, volume) {
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            serverQueue.volume = volume;
-            serverQueue.connection.dispatcher.setVolume(volume/100);
-            console.log(this.queue.get(guildID).volume);
-            return resolve();
-        });
-    }
-    getVolume(guildID) {
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+            		serverQueue.volume = volume;
+            		serverQueue.connection.dispatcher.setVolume(volume/100);
+            		console.log(this.queue.get(guildID).volume);
+            		return resolve();
+        	});
+    	}
+    	getVolume(guildID) {
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            return resolve(serverQueue.volume);
-        });
-    }
-    setRepeat(guildID, mode) {
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+            		return resolve(serverQueue.volume);
+        	});
+    	}
+    	setRepeat(guildID, mode) {
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            let song = serverQueue.songs[0];
-            serverQueue.repeat = mode;
-            return resolve(song);
-        });
-    }
-    shuffle(guildID) {
-        return new Promise(async(resolve, reject) => {
-            let serverQueue = this.queue.get(guildID);
+            		let song = serverQueue.songs[0];
+            		serverQueue.repeat = mode;
+            		return resolve(song);
+        	});
+    	}
+    	shuffle(guildID) {
+        	return new Promise(async(resolve, reject) => {
+            		let serverQueue = this.queue.get(guildID);
 			if (!serverQueue||serverQueue.songs.length < 1) return reject("Có bài nào đang phát đâu!");
-            Shuffle(serverQueue.songs);
-            return resolve(serverQueue.songs.length);
-        });
-    }
+            		Shuffle(serverQueue.songs);
+            		return resolve(serverQueue.songs.length);
+        	});
+    	}
 	async PlaySong(guildID) {
 		let serverQueue = this.queue.get(guildID);
 		if (!serverQueue) return undefined;
