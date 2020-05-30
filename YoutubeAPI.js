@@ -17,7 +17,7 @@ module.exports = {
 				return reject(err);
 			})
 		})
-	}
+	},
 	searchVideos(query, maxResults) {
 		return new Promise(async (resolve, reject) =>{
 			let q = query.replace(/\s/g, "%20");
@@ -29,7 +29,7 @@ module.exports = {
 				return reject(err);
 			})
 		})
-	}
+	},
 	getVideo(id) {
 		return new Promise(async (resolve, reject) => {
 			let url = `${GOOGLE_API_URL}videos?part=snippet&id=${id}&key=${GOOGLE_API_KEY}`;
@@ -40,7 +40,7 @@ module.exports = {
 				return reject(err);
 			})
 		})
-	}
+	},
 	getPlaylist(id) {
 		return new Promise(async (resolve, reject) => {
 			let url = `${GOOGLE_API_URL}playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=${GOOGLE_API_KEY}`;
@@ -51,5 +51,5 @@ module.exports = {
 				return reject(err);
 			})
 		});
-	}
+	},
 }
